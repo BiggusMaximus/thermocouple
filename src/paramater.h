@@ -1,0 +1,1 @@
+float SUHU = 25.9;
