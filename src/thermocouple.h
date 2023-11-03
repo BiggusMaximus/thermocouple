@@ -3,8 +3,8 @@ const int NUMBER_OF_THERMOCOUPLES = 10;
 float C[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 int PIN_THERMOCOUPLE[10][3] = {
     // CLK, CS, SO
-    {52, 50, 48},
-    {53, 51, 49},
+    {26, 24, 22},
+    {27, 25, 23},
     {47, 45, 43},
     {A13, A14, A15},
     {A10, A11, A12},
@@ -29,16 +29,27 @@ MAX6675 thermocouple10(PIN_THERMOCOUPLE[9][0], PIN_THERMOCOUPLE[9][1], PIN_THERM
 void calibrate_thermocouples()
 {
     // c = 25 -26 =
-    C[0] = C[0] + 0.834 * thermocouple1.readCelsius() + 4.2562 - SUHU;
-    C[1] = C[1] + 0.9227 * thermocouple2.readCelsius() + 1.5337 - SUHU;
-    C[2] = C[2] + 0.9925 * thermocouple3.readCelsius() + 0.756 - SUHU;
-    C[3] = C[3] + 0.9559 * thermocouple4.readCelsius() + 0.0025 - SUHU;
-    C[4] = C[4] + 1.0334 * thermocouple5.readCelsius() + 3.5729 - SUHU;
-    C[5] = C[5] + 0.959 * thermocouple6.readCelsius() + 0.033 - SUHU;
-    C[6] = C[6] + 0.9656 * thermocouple7.readCelsius() + 0.5489 - SUHU;
-    C[7] = C[7] + 0.8171 * thermocouple8.readCelsius() + 5.215 - SUHU;
-    C[8] = C[8] + 1.0114 * thermocouple9.readCelsius() + 1.1183 - SUHU;
-    C[9] = C[9] + 0.953 * thermocouple10.readCelsius() + 0.5772 - SUHU;
+    // C[0] = C[0] + 1.3473 * thermocouple1.readCelsius() - 6.3064 - SUHU;
+    // C[1] = C[1] + 1.3609 * thermocouple2.readCelsius() - 6.2511 - SUHU;
+    // C[2] = C[2] + 1.3038 * thermocouple3.readCelsius() - 5.2852 - SUHU;
+    // C[3] = C[3] + 1.3178 * thermocouple4.readCelsius() - 6.2457 - SUHU;
+    // C[4] = C[4] + 1.1365 * thermocouple5.readCelsius() - 2.38   - SUHU;
+    // C[5] = C[5] + 1.3133 * thermocouple6.readCelsius() - 6.6797 - SUHU;
+    // C[6] = C[6] + 1.3211 * thermocouple7.readCelsius() - 6.6039 - SUHU;
+    // C[7] = C[7] + 1.2534 * thermocouple8.readCelsius() - 5.0308 - SUHU;
+    // C[8] = C[8] + 1.3168 * thermocouple9.readCelsius() - 5.65   - SUHU;
+    // C[9] = C[9] + 1.223 * thermocouple10.readCelsius() - 4.4037 - SUHU;
+
+    C[0] = thermocouple1.readCelsius();
+    C[1] = thermocouple2.readCelsius();
+    C[2] = thermocouple3.readCelsius();
+    C[3] = thermocouple4.readCelsius();
+    C[4] = thermocouple5.readCelsius();
+    C[5] = thermocouple6.readCelsius();
+    C[6] = thermocouple7.readCelsius();
+    C[7] = thermocouple8.readCelsius();
+    C[8] = thermocouple9.readCelsius();
+    C[9] = thermocouple10.readCelsius();
 }
 
 void show_thermocouples_pin()
@@ -61,18 +72,30 @@ void show_thermocouples_pin()
 }
 float *read_temperatures()
 {
-    static float data[NUMBER_OF_THERMOCOUPLES] = {
-        -C[0] + 0.834 * thermocouple1.readCelsius() + 4.2562,
-        -C[1] + 0.9227 * thermocouple2.readCelsius() + 1.5337,
-        -C[2] + 0.9925 * thermocouple3.readCelsius() + 0.7563,
-        -C[3] + 0.9559 * thermocouple4.readCelsius() + 0.0025,
-        -C[4] + 1.0334 * thermocouple5.readCelsius() + 3.5729,
-        -C[5] + 0.959 * thermocouple6.readCelsius() + 0.033,
-        -C[6] + 0.9656 * thermocouple7.readCelsius() + 0.5489,
-        -C[7] + 0.8171 * thermocouple8.readCelsius() + 5.215,
-        -C[8] + 1.0114 * thermocouple9.readCelsius() + 1.1183,
-        -C[9] + 0.953 * thermocouple10.readCelsius() + 0.5772};
+    static float data[NUMBER_OF_THERMOCOUPLES] = 
+    {
+        // -C[0] + 1.3473 * thermocouple1.readCelsius() - 6.3064,
+        // -C[1] + 1.3609 * thermocouple2.readCelsius() - 6.2511,
+        // -C[2] + 1.3038 * thermocouple3.readCelsius() - 5.2852,
+        // -C[3] + 1.3178 * thermocouple4.readCelsius() - 6.2457,
+        // -C[4] + 1.1365 * thermocouple5.readCelsius() - 2.38,
+        // -C[5] + 1.3133 * thermocouple6.readCelsius() - 6.6797,
+        // -C[6] + 1.3211 * thermocouple7.readCelsius() - 6.6039,
+        // -C[7] + 1.2534 * thermocouple8.readCelsius() - 5.0308,
+        // -C[8] + 1.3168 * thermocouple9.readCelsius() - 5.65,
+        // -C[9] + 1.223 * thermocouple10.readCelsius() - 4.4037
 
+        thermocouple1.readCelsius(),
+        thermocouple2.readCelsius(),
+        thermocouple3.readCelsius(),
+        thermocouple4.readCelsius(),
+        thermocouple5.readCelsius(),
+        thermocouple6.readCelsius(),
+        thermocouple7.readCelsius(),
+        thermocouple8.readCelsius(),
+        thermocouple9.readCelsius(),
+        thermocouple10.readCelsius()
+    };
     return data;
 }
 

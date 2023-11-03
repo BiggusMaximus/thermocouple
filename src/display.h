@@ -20,7 +20,7 @@ void start_display()
     }
     delay(2000);
     display.clearDisplay();
-    display.invertDisplay(true);
+    display.invertDisplay(false);
     display.setTextSize(1);
     display.setTextColor(WHITE);
     display.setCursor(25, 10);
